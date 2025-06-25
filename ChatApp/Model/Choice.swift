@@ -10,7 +10,6 @@ import Foundation
 struct Choice: Codable {
   let index: Int
   let message: Message
-  let logprobs: String?
   let finish_reason: String
 }
 

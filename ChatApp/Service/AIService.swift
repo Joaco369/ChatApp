@@ -31,11 +31,13 @@ class AIService {
   }
   
   private func decodeResponse(_ data: Data) -> String {
+    print("=== Raw Response ===")
+    print(String(data: data, encoding: .utf8) ?? "No string")
     do {
       let aiResponse = try JSONDecoder().decode(AIResponse.self, from: data)
       return aiResponse.choices.first?.message.content ?? "No response found"
     } catch {
-      print("Error. Failed to decode JSON")
+      print("Error decoding: \(error)")
       return errorMessage
     }
   }

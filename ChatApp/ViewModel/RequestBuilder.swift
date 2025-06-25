@@ -20,17 +20,17 @@ class RequestBuilder {
     
     var request = URLRequest(url: apiUrl)
     request.httpMethod = "POST"
-    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.addValue("Bearer \(apiKey ?? "No api key")", forHTTPHeaderField: "Authorization")
     
     let parameters: [String: Any] = [
-      "model": "gpt-4o-mini",
+      "model": "gpt-3.5-turbo",
       "messages": [
           ["role": "user", "content": prompt]
         ]
       ]
     
-    guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return nil }
+    guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters) else { return nil }
     request.httpBody = jsonData
     return request
   }
