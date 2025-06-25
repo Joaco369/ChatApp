@@ -33,6 +33,7 @@ class AIService {
   private func decodeResponse(_ data: Data) -> String {
     do {
       let aiResponse = try JSONDecoder().decode(AIResponse.self, from: data)
+      return aiResponse.choices.first?.message.content ?? "No response found"
     } catch {
       print("Error. Failed to decode JSON")
       return errorMessage
